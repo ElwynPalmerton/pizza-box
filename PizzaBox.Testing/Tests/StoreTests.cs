@@ -30,4 +30,13 @@ namespace PizzaBox.Testing.Tests
 
 
 
+// [ ] Write additional tests for:
+// [ ] Each class:
+// [ ]  Customer
+// [ ]  Stores
+// [ ]      -Test the New York store.
+// [ ]  Pizza
+// [ ]  Order
+//
+// [ ] What needs to be tested for each one (finish list)?
 
