@@ -1,0 +1,27 @@
+using System.Collections.Generic;
+using PizzaBox.Domain.Abstract;
+using PizzaBox.Domain.Models.Stores;
+
+namespace PizzaBox.Client.Singletons
+{
+    
+    /// <summary>
+    ///
+    /// </summary>
+
+
+    public class PizzaSingleton
+    {
+
+        private static readonly List<APizza> _pizzas = new List<APizza>()
+        {
+            new CustomPizza(),
+            new MeatPizza(),
+            new VeggiePizza()
+        }
+
+    }
+
+}z
+    //Changes pizzs to PizzaSingleton.pizzas in the foreach loops and various references.
+           

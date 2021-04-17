@@ -68,3 +68,10 @@ namespace PizzaBox.Domain.Models
 //MISCELLANEOUS clean-ups
 // [ ] Refactor so that the order takes the actual Customer and Store objects instead of the string.
 // [ ] Move WelcomeToPizzaBox into its own file.
+//
+// RE: Thursday class
+// [ ] Add tests.
+// [ ] Create the Store and Pizza Singletons and get these working.
+// [ ] Test the Singletons.
+// [ ] Create a separate project space for saving.
+//          -This can be called "Storing."  (See Fred's code.)

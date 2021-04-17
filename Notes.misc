@@ -1,0 +1,6 @@
+serialize data to a file.
+
+1. Need a file to access.
+2. Open the file3. Convert the object to text
+3. Write text to the file.
+4. Close the file.

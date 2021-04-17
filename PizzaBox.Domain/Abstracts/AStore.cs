@@ -1,7 +1,12 @@
 using System;
+using System.Xml.Serialization;
+using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Domain.Abstracts
 {
+
+    [XmlInclude(typeof(ChicagoStore))]   //This was done for the testing.
+    [XmlInclude(typeof(NewYorkStore))]
 
     public abstract class AStore 
     {
@@ -12,10 +17,11 @@ namespace PizzaBox.Domain.Abstracts
 
         {
             return Name;
-        }
-    
+        }   
     }
 }
+
+
 
 //As a store
 //Should be able to launch the application.
