@@ -8,12 +8,36 @@ namespace PizzaBox.Client.Singletons
     public class StoreSingleton
     {
 
+        public List<AStore> Stores {get;}
+        private static StoreSingleton _instance;
 
-        private static readonly List<AStore> _stores = new List<AStore>()
+        
+
+   
+        public static StoreSingleton Instance
         {
-            new ChicagoStore(),
-            new NewYorkStore(),
-        };
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new StoreSingleton();
+                }
+            }
+
+            return _instance;
+        }
+
+         private StoreSingleton() {
+            if (Stores == null)
+            {
+                Stores = Stores(){
+
+                }
+            }
+        }
+
+
+
   }
 
 
