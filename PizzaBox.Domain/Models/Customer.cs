@@ -1,4 +1,5 @@
 using PizzaBox.Domain.Abstracts;    //What do the dots mean?
+using sc = System.Console;
 
 namespace PizzaBox.Domain.Models
 
@@ -9,9 +10,16 @@ namespace PizzaBox.Domain.Models
     {
 
         public string Name {get; protected set;}
-        public Customer(string Name)
+        public string Address {get; protected set;}
+        public string PhoneNumber {get; protected set;}
+
+
+        public Customer(string name, string address, string phoneNumber)
         {
-            this.Name = Name;
+            // this.GetName();
+            this.Name = name;
+            this.Address = address;
+            this.PhoneNumber = phoneNumber;
         }
     }
 }
@@ -40,7 +48,10 @@ namespace PizzaBox.Domain.Models
 
 // [ ] Launch the application. Create an if-then for 1. Customer 2. Owner.
 // [x] view all the stores.
-// [x] Select a store
+
+
+///////////////////PLACING AN ORDER////////////////////////
+/// // [x] Select a store
 // [ ] Create a while-do loop for placing an order. (Where does this go?)
 //      -Uses a flag and asks the user if they want another pizza after each pizza is determined.
 // [ ]      Prompt inside the loop to ask if they want a custom or preset pizza.

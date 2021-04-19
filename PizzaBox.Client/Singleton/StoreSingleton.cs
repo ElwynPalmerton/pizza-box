@@ -8,10 +8,7 @@ namespace PizzaBox.Client.Singletons
     public class StoreSingleton
     {
         public List<AStore> Stores {get;}
-
         private static StoreSingleton _instance;
-
-
         public static StoreSingleton Instance
         {
             get

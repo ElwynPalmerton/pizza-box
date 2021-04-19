@@ -11,7 +11,7 @@ namespace PizzaBox.Domain.Models
         
         public NewYorkStore()
         {
-            Name = "NewYorkStore";
+            Name = "New York Store";
         }
     }
 }

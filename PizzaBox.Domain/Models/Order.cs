@@ -1,26 +1,21 @@
 using sc = System.Console;
+using PizzaBox.Domain.Abstracts;
 
 namespace PizzaBox.Domain.Models
 {
 
     public class Order
     {
-        //Order has customer.
-        //and a store.
-        public string CustomerName;
-        public string StoreName;
-
-         public Order(string Store, string Customer) //This needs to be refactored to be the object.
-        {
-            this.CustomerName = Customer;
-            this.StoreName = Store;
-
-            sc.WriteLine("");
-            sc.WriteLine("Your order so far: ");
-            sc.WriteLine("customer name: " + this.CustomerName);
-            sc.WriteLine("store name: " + this.StoreName);
-
-        }
+        public Customer Customer {get; set;}
+        public AStore Store {get; set;}
+        public APizza Pizza {get; set;}
+        // public decimal TotalCost
+        // {
+        //     get
+        //     {
+        //         // return Pizza.Crust.Price + Pizza.size.Price + Pizza.Topping.Sum(t => t.Price);
+        //     }
+        // }
     }
 }
 

@@ -10,7 +10,7 @@ namespace PizzaBox.Domain.Models
   
         public ChicagoStore()
         {
-            Name = "ChicagoStore";
+            Name = "Chicago Store";
         }
 
 
