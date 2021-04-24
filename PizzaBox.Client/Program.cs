@@ -10,56 +10,39 @@ namespace PizzaBox.Client
 {
     public class Program 
     {   
+
         private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance;
         private static readonly PizzaSingleton _pizzaSingleton = PizzaSingleton.Instance;
-       
-        private static Customer GetCustomer()
-        {    
-            string CustomerName = UserInterface.GetUserInfo("Please enter your name: ");
-            string StreetAddress = UserInterface.GetUserInfo("Please enter your address: ");
-            string PhoneNumber = UserInterface.GetUserInfo("Please enter your phone#: ");
-
-            var newCustomer = new Customer(CustomerName, StreetAddress, PhoneNumber);
-
-            return newCustomer;
+        private static readonly CustomerSingleton _customerSingleton = CustomerSingleton.Instance;
+        private static readonly ToppingSingleton _toppingSingleton = ToppingSingleton.Instance;
+        private static readonly SizeSingleton _sizeSingleton = SizeSingleton.Instance;
+        private static readonly CrustSingleton _crustSingleton = CrustSingleton.Instance;
+        private static readonly OrderSingleton _orderSingleton = OrderSingleton.Instance;
+     
+        private static void Main() 
+        {
+            Run();
         }
 
-        private static void PrintStoreList()
+        private static void Run() 
         {
-            int index = 0;
-                        
-            sc.WriteLine();
-            sc.WriteLine("Please select a store near you: ");
-            sc.WriteLine();
+            var order = new Order();
 
-            foreach (var store in _storeSingleton.Stores)
-            {
-                index++;
-                sc.WriteLine($"{index} {store.Name}");
-            }
-        }
+            // UserInterface.WelcomeToPizzaBox(); 
+            // order.Customer = GetCustomer();    
+            // order.Store = SelectStore();
+            // order.Pizza = BuildYourPizza();       
 
-        private static void PrintPizzaList()
-        {
-            int index = 0;
-                        
-            sc.WriteLine();
-            sc.WriteLine("What kind of pizza would you like? ");
-    
-            sc.WriteLine();
+            // var newCust = _customerSingleton.Customers;
+            // sc.WriteLine(Customers[0].ToString());
 
-            foreach (var pizza in _pizzaSingleton.Pizzas)
-            {
-                index++;
-                sc.WriteLine($"{index} {pizza.Name}");
-            }
+            // sc.WriteLine(_crustSingleton.ViewAll());
+
+            // UserInterface.OutputCurrentState(order);
         }
 
         private static AStore SelectStore()
         {
-            // sc.BackgroundColor = ConsoleColor.DarkRed;
-            // sc.ForegroundColor = ConsoleColor.Yellow;
-
             bool validEntry = false;
             int storeNumber = -1;
             AStore newStore;
@@ -85,6 +68,40 @@ namespace PizzaBox.Client
                 return newStore;
         }
 
+        private static void PrintStoreList()
+        {
+            int index = 0;
+                        
+            sc.WriteLine();
+            sc.WriteLine("Please select a store near you: ");
+            sc.WriteLine();
+
+            foreach (var store in _storeSingleton.Stores)
+            {
+                index++;
+                sc.WriteLine($"{index} {store.Name}");
+            }
+        }
+
+        private static Customer GetCustomer()
+        {    
+            string CustomerName = UserInterface.GetUserInfo("Please enter your name: ");
+            string StreetAddress = UserInterface.GetUserInfo("Please enter your address: ");
+            string PhoneNumber = UserInterface.GetUserInfo("Please enter your phone#: ");
+
+            var newCustomer = new Customer(CustomerName, StreetAddress, PhoneNumber);
+
+            return newCustomer;
+        }
+
+        private static APizza BuildYourPizza()
+        {
+            var newPizza = SelectPizza();
+            return newPizza;
+
+            //How do I add toppings? -Loop through a menu of toppings or something.
+            //Build a topping singleton?
+        }
         private static APizza SelectPizza()    //Need to change void to APizza
         {
             bool validEntry = false;
@@ -110,36 +127,25 @@ namespace PizzaBox.Client
                     pizzaNumber--;
                 }
             }       
-                newPizza = _pizzaSingleton.Pizzas[pizzaNumber]; //new ???
+                newPizza = _pizzaSingleton.Pizzas[pizzaNumber];
                 return newPizza;    
         }
 
-        private static APizza BuildYourPizza()
+
+        private static void PrintPizzaList()
         {
-            var newPizza = SelectPizza();
-            return newPizza;
+            int index = 0;
+                        
+            sc.WriteLine();
+            sc.WriteLine("What kind of pizza would you like? ");
+    
+            sc.WriteLine();
 
-            //How do I add toppings? -Loop through a menu of toppings or something.
-            //Build a topping singleton?
-
-        }
-
-        private static void Run() 
-        {
-            var order = new Order();
-
-//             UserInterface.WelcomeToPizzaBox();
-//             order.Customer = GetCustomer();
-//             order.Store = SelectStore();
-
-            order.Pizza = BuildYourPizza();     
-
-            UserInterface.OutputCurrentState(order);
-
-        }
-        private static void Main() 
-        {
-            Run();
+            foreach (var pizza in _pizzaSingleton.Pizzas)
+            {
+                index++;
+                sc.WriteLine($"{index} {pizza.Name}");
+            }
         }
     }   
 }

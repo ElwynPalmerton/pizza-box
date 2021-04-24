@@ -1,12 +1,16 @@
 using System.Collections.Generic;
 using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Models;
+using PizzaBox.Storing;
+using PizzaBox.Storing.Repositories;
 
 namespace PizzaBox.Client.Singletons
 {
 
     public class StoreSingleton
     {
+        private const string _path = @"data/stores.xml";
+        private readonly FileRepository _fileRepository = new FileRepository();
         public List<AStore> Stores {get;}
         private static StoreSingleton _instance;
         public static StoreSingleton Instance
@@ -25,11 +29,9 @@ namespace PizzaBox.Client.Singletons
         {
             if (Stores == null)
             {
-                Stores = new List<AStore>
-                {
-                    new ChicagoStore(),
-                    new NewYorkStore(),
-                };
+                Stores = _fileRepository.ReadFromFile<List<AStore>>(_path);
+
+                //Stores = _context.Stores.ToList();
             }
         }
     }

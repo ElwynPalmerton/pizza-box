@@ -41,19 +41,18 @@ namespace PizzaBox.Client.Helpers
                 int entryInt = int.Parse(entry);
                 isInRange = entryInt >= 0 && entryInt <= range;
             }
-
             return isANumber && isInRange;
         }
 
         public static void OutputCurrentState(Order o)
         {
-            sc.WriteLine();
-            sc.WriteLine("Current State: ");
+            // sc.WriteLine();
+            // sc.WriteLine("Current State");
             // sc.WriteLine("Customer name: " + o.Customer.Name);
             // sc.WriteLine("Customer address: " + o.Customer.Address);
             // sc.WriteLine("Customer phone number: " + o.Customer.PhoneNumber);
             // sc.WriteLine("Selected Store: " + o.Store.Name);
-            sc.WriteLine("Selected Store: " + o.Pizza.Name);
+            // sc.WriteLine("Selected Pizza: " + o.Pizza.Name);
             sc.WriteLine();
         }
 

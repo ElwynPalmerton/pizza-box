@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfSize xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Teensy-weensy</Name>
+    <Price>0.01</Price>
+  </Size>
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Teeny-tiny</Name>
+    <Price>1.00</Price>
+  </Size>
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Tiny</Name>
+    <Price>1.00</Price>
+  </Size>
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Very Small</Name>
+    <Price>1.00</Price>
+  </Size>
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Small</Name>
+    <Price>15.00</Price>
+  </Size>
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Medium Small</Name>
+    <Price>17.50</Price>
+  </Size>
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Medium</Name>
+    <Price>20.00</Price>
+  </Size>
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Medium Large</Name>
+    <Price>22.00</Price>
+  </Size>
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Large</Name>
+    <Price>25.00</Price>
+  </Size>
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Extra Large</Name>
+    <Price>25.00</Price>
+  </Size>
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Extra Extra Large</Name>
+    <Price>30.00</Price>
+  </Size>
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Huge</Name>
+    <Price>40.00</Price>
+  </Size>
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Giant</Name>
+    <Price>50.00</Price>
+  </Size>
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Ginormo</Name>
+    <Price>75.00</Price>
+  </Size>
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Collossal</Name>
+    <Price>100.00</Price>
+  </Size>
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Gigundo</Name>
+    <Price>200.00</Price>
+  </Size>
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Preposterously Ginormous</Name>
+    <Price>500.00</Price>
+  </Size>
+  <Size>
+    <EntityId>0</EntityId>
+    <Name>Guiness Book of World Records Record Setter</Name>
+    <Price>100000.00</Price>
+  </Size>
+</ArrayOfSize>

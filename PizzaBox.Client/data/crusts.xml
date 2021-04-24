@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfCrust xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Crust>
+    <EntityId>0</EntityId>
+    <Name>Thin</Name>
+    <Price>0.00</Price>
+  </Crust>
+  <Crust>
+    <EntityId>0</EntityId>
+    <Name>Sicilian</Name>
+    <Price>4.00</Price>
+  </Crust>
+  <Crust>
+    <EntityId>0</EntityId>
+    <Name>Stuffed Crust</Name>
+    <Price>5.50</Price>
+  </Crust>
+</ArrayOfCrust>

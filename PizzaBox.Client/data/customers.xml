@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Customer>
+    <Name>Elwyn</Name>
+    <Address>100 PizzaEater Street</Address>
+    <PhoneNumber>917-653-2438</PhoneNumber>
+  </Customer>
+  <Customer>
+    <Name>Dave</Name>
+    <Address>Buster St.</Address>
+    <PhoneNumber>666-777-9999</PhoneNumber>
+  </Customer>
+  <Customer>
+    <Name>Juan</Name>
+    <Address>City Terrace</Address>
+    <PhoneNumber>211-111-2222</PhoneNumber>
+  </Customer>
+</ArrayOfCustomer>

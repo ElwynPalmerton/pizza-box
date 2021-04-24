@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAPizza xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <APizza xsi:type="CustomPizza">
+    <EntityId>0</EntityId>
+    <Name>Custom Pizza</Name>
+    <Crust>
+      <EntityId>0</EntityId>
+      <Name>Thick</Name>
+      <Price>0</Price>
+    </Crust>
+    <Size>
+      <EntityId>0</EntityId>
+      <Name>Medium</Name>
+      <Price>0</Price>
+    </Size>
+    <Toppings>
+      <Topping>
+        <EntityId>0</EntityId>
+        <Name>Cheese</Name>
+        <Price>0</Price>
+      </Topping>
+      <Topping>
+        <EntityId>0</EntityId>
+        <Name>Marinara</Name>
+        <Price>0</Price>
+      </Topping>
+    </Toppings>
+  </APizza>
+  <APizza xsi:type="MeatPizza">
+    <EntityId>0</EntityId>
+    <Name>Meat Pizza</Name>
+    <Crust>
+      <EntityId>0</EntityId>
+      <Name>Thin</Name>
+      <Price>0</Price>
+    </Crust>
+    <Size>
+      <EntityId>0</EntityId>
+      <Name>Medium</Name>
+      <Price>0</Price>
+    </Size>
+    <Toppings>
+      <Topping>
+        <EntityId>0</EntityId>
+        <Name>Pepperoni</Name>
+        <Price>0</Price>
+      </Topping>
+      <Topping>
+        <EntityId>0</EntityId>
+        <Name>Sausage</Name>
+        <Price>0</Price>
+      </Topping>
+    </Toppings>
+  </APizza>
+  <APizza xsi:type="VeggiePizza">
+    <EntityId>0</EntityId>
+    <Name>Veggie Pizza</Name>
+    <Crust>
+      <EntityId>0</EntityId>
+      <Name>Gluten Free</Name>
+      <Price>0</Price>
+    </Crust>
+    <Size>
+      <EntityId>0</EntityId>
+      <Name>Medium</Name>
+      <Price>0</Price>
+    </Size>
+    <Toppings>
+      <Topping>
+        <EntityId>0</EntityId>
+        <Name>Peppers</Name>
+        <Price>0</Price>
+      </Topping>
+      <Topping>
+        <EntityId>0</EntityId>
+        <Name>Mushrooms</Name>
+        <Price>0</Price>
+      </Topping>
+    </Toppings>
+  </APizza>
+</ArrayOfAPizza>
