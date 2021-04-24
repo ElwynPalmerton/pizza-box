@@ -8,7 +8,7 @@ namespace PizzaBox.Domain.Abstracts
     [XmlInclude(typeof(ChicagoStore))]   //This was done for the testing.
     [XmlInclude(typeof(NewYorkStore))]
 
-    public abstract class AStore 
+    public abstract class AStore : AModel 
     {
         public string Name {get; protected set;} 
      

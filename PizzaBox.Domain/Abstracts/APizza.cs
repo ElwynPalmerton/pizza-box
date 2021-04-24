@@ -8,7 +8,8 @@ using sc = System.Console;
 
 namespace PizzaBox.Domain.Abstracts{
 
-  public abstract class APizza{
+  public abstract class APizza : AModel 
+  {
 
     public string Name;
 

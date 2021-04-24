@@ -21,9 +21,6 @@ namespace PizzaBox.Testing.Tests
 
             // assert
             Assert.True(actual == "ChicagoStore");
-
-
-
         }
     }
 }

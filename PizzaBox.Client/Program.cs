@@ -5,7 +5,6 @@ using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Models;
 using PizzaBox.Client.Singletons;
 using PizzaBox.Client.Helpers;
-using PizzaBox.Client.Test;
 
 namespace PizzaBox.Client 
 {
@@ -71,11 +70,10 @@ namespace PizzaBox.Client
                 PrintStoreList();
                 storeSelection = UserInterface.GetUserInfo("Enter the number of your store: ");
 
-
                 validEntry = UserInterface.CheckValidNumber(storeSelection, _storeSingleton.Stores.Count); 
 
                 if (!validEntry)
-                {             
+                {
                     UserInterface.InvalidEntry(storeSelection);
                 } else {
                     storeNumber = int.Parse(storeSelection);
@@ -83,8 +81,8 @@ namespace PizzaBox.Client
                     storeNumber--;
                 }
             }       
-                newStore = _storeSingleton.Stores[storeNumber]; 
-                return newStore;           
+                newStore = _storeSingleton.Stores[storeNumber];
+                return newStore;
         }
 
         private static APizza SelectPizza()    //Need to change void to APizza
@@ -95,7 +93,6 @@ namespace PizzaBox.Client
             string pizzaSelection;
 
   
-
             while (!validEntry)
             {
                
@@ -113,18 +110,17 @@ namespace PizzaBox.Client
                     pizzaNumber--;
                 }
             }       
-                newPizza = _pizzaSingleton.Pizzas[pizzaNumber]; 
+                newPizza = _pizzaSingleton.Pizzas[pizzaNumber]; //new ???
                 return newPizza;    
         }
 
         private static APizza BuildYourPizza()
         {
             var newPizza = SelectPizza();
-
             return newPizza;
 
-            //How do I add toppings and whatnot???
-
+            //How do I add toppings? -Loop through a menu of toppings or something.
+            //Build a topping singleton?
 
         }
 
@@ -136,16 +132,12 @@ namespace PizzaBox.Client
 //             order.Customer = GetCustomer();
 //             order.Store = SelectStore();
 
-            order.Pizza = BuildYourPizza();
+            order.Pizza = BuildYourPizza();     
 
-        
-
-
-            // order.Pizza = SelectPizza();
             UserInterface.OutputCurrentState(order);
 
         }
-         private static void Main() 
+        private static void Main() 
         {
             Run();
         }

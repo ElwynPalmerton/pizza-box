@@ -26,9 +26,7 @@ namespace PizzaBox.Client.Singletons
                     new VeggiePizza(),
                 };
             }
-         
-        }
-        
+        }        
 
         public static PizzaSingleton Instance
         {
