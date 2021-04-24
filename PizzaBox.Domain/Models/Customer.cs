@@ -9,9 +9,9 @@ namespace PizzaBox.Domain.Models
     public class Customer
     {
 
-        public string Name {get; protected set;}
-        public string Address {get; protected set;}
-        public string PhoneNumber {get; protected set;}
+        public string Name {get; set;}
+        public string Address {get; set;}
+        public string PhoneNumber {get; set;}
 
 
         public Customer(string name, string address, string phoneNumber)
@@ -21,6 +21,16 @@ namespace PizzaBox.Domain.Models
             this.Address = address;
             this.PhoneNumber = phoneNumber;
         }
+
+        public Customer()
+        {
+
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} - {Address} -  {PhoneNumber}";
+        }  
     }
 }
 

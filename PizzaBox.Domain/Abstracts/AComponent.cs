@@ -18,6 +18,9 @@ namespace PizzaBox.Domain.Abstracts{
       return Name;
     }
 
+    public string MenuString()
+    {
+      return $"{Name} - ${Price}";
+    }
   }
-
 }

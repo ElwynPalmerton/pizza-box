@@ -5,12 +5,12 @@ using PizzaBox.Domain.Models;
 namespace PizzaBox.Domain.Abstracts
 {
 
-    [XmlInclude(typeof(ChicagoStore))]   //This was done for the testing.
+    [XmlInclude(typeof(ChicagoStore))]   
     [XmlInclude(typeof(NewYorkStore))]
 
     public abstract class AStore : AModel 
     {
-        public string Name {get; protected set;} 
+        public string Name {get; set;} 
      
 
         public override string ToString()

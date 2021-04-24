@@ -8,6 +8,11 @@ using sc = System.Console;
 
 namespace PizzaBox.Domain.Abstracts{
 
+
+    [XmlInclude(typeof(CustomPizza))]   
+    [XmlInclude(typeof(MeatPizza))]
+    [XmlInclude(typeof(VeggiePizza))]
+
   public abstract class APizza : AModel 
   {
 
