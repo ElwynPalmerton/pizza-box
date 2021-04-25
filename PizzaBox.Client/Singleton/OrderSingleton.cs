@@ -45,8 +45,9 @@ namespace PizzaBox.Client.Singletons
 
             {
                 var loc = new ChicagoStore();
-                var jim = new Customer("Jim", "1Jim Street", "111-222-3333");
+                var jim = new Customer("Jim", "1 Jim Street", "111-222-3333");
                 var jimsPizza = new CustomPizza();
+
                 Orders = new List<Order>{
                     new Order(){Customer=jim, Store=loc, Pizza=jimsPizza},
                 };

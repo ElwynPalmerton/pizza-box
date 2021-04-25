@@ -9,16 +9,12 @@ namespace PizzaBox.Client.Helpers
 {
 
     public class UserInterface
-    {
-        public static void PrintHi()
+    {        
+        public static string GetUserInfo(string message)
         {
-          sc.WriteLine("Hello from UserInterface!");
-        }
-        public static string GetUserInfo(string Message)
-        {
-            sc.WriteLine("");
-            sc.Write(Message);
+            sc.Write(message);
             string ReturnValue = sc.ReadLine();
+            // sc.Clear();
             return ReturnValue;
         }
 
@@ -44,15 +40,11 @@ namespace PizzaBox.Client.Helpers
             return isANumber && isInRange;
         }
 
-        public static void OutputCurrentState(Order o)
+        public static void MenuTitle(string title)
         {
-            // sc.WriteLine();
-            // sc.WriteLine("Current State");
-            // sc.WriteLine("Customer name: " + o.Customer.Name);
-            // sc.WriteLine("Customer address: " + o.Customer.Address);
-            // sc.WriteLine("Customer phone number: " + o.Customer.PhoneNumber);
-            // sc.WriteLine("Selected Store: " + o.Store.Name);
-            // sc.WriteLine("Selected Pizza: " + o.Pizza.Name);
+            sc.ForegroundColor = ConsoleColor.Blue;
+            sc.WriteLine(title);
+            sc.ResetColor();
             sc.WriteLine();
         }
 

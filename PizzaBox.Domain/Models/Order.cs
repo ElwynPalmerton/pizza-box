@@ -1,6 +1,7 @@
 using sc = System.Console;
 using PizzaBox.Domain.Abstracts;
 using System.Text;
+using System.Collections.Generic;
 
 namespace PizzaBox.Domain.Models
 {
@@ -11,7 +12,9 @@ namespace PizzaBox.Domain.Models
         public AStore Store {get; set;}
         public APizza Pizza {get; set;}
 
+        public List<APizza> Pizzas {get; set;}
 
+        
 
         public override string ToString()
         {
@@ -24,8 +27,13 @@ namespace PizzaBox.Domain.Models
             stringBuilder.Append(Store.ToString() + "\n");
 
             //Iterate over the pizzas.
+        
+            stringBuilder.Append(Pizza.ToString() + "\n");
+
 
             return stringBuilder.ToString().TrimEnd(separator.ToCharArray());
+
+            //Include price calculation.
     
         }  
   

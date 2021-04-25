@@ -18,9 +18,8 @@ namespace PizzaBox.Testing.Tests
             //sut.Name = "dotnet";  //Cannot be changed because it is protected.
             //actual = "dotnet"; //This should not happen
             
-
             // assert
-            Assert.True(actual == "ChicagoStore");
+            Assert.IsType<string>(actual);
         }
     }
 }

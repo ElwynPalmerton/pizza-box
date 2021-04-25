@@ -15,6 +15,8 @@ namespace PizzaBox.Client.Singletons
 
         public List<APizza> Pizzas;
 
+        public List<string> PizzaStrings = new List<string>();
+
         private static PizzaSingleton _instance;
  
         public static PizzaSingleton Instance
@@ -44,5 +46,14 @@ namespace PizzaBox.Client.Singletons
 
             }
         }    
+
+        public List<string> ToStringList()
+        {
+            foreach(APizza p in Pizzas)
+            {
+                PizzaStrings.Add(p.Name);
+            }
+            return PizzaStrings;
+        }
     }
 }

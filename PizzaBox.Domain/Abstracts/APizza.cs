@@ -5,9 +5,7 @@ using PizzaBox.Domain.Models;
 using sc = System.Console;
 //using PizzaBox.Domain.Models.Pizzas;
 
-
 namespace PizzaBox.Domain.Abstracts{
-
 
     [XmlInclude(typeof(CustomPizza))]   
     [XmlInclude(typeof(MeatPizza))]
@@ -15,12 +13,12 @@ namespace PizzaBox.Domain.Abstracts{
 
   public abstract class APizza : AModel 
   {
-
     public string Name;
-
     public Crust Crust {get; set;}
     public Size Size {get; set;}
     public List<Topping> Toppings {get; set;}
+
+    public decimal Price {get; set;}
 
     protected APizza()
     {
@@ -50,8 +48,29 @@ namespace PizzaBox.Domain.Abstracts{
         stringBuilder.Append($"{item}{separator}");
       }
 
-      return $"{Crust} - {Size} -  {stringBuilder.ToString().TrimEnd(separator.ToCharArray())}";
+      return $"{Crust} \t- {Size} \t\t- {stringBuilder.ToString().TrimEnd(separator.ToCharArray())}";
    
     }  
+
+    public static string Headings()
+    {
+      return $"Crust\t\t - Size\t -  Toppings";
+    }
+
+    public decimal ComputePrice()
+    {
+      decimal totalPrice = 0.00M;
+
+      totalPrice += Size.Price;
+      totalPrice += Crust.Price;
+
+      foreach (Topping t in Toppings)
+      {
+        totalPrice += t.Price;
+      }
+      
+      return totalPrice;
+    }
+
   }
 }

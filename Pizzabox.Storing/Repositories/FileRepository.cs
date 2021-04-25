@@ -23,7 +23,6 @@ namespace PizzaBox.Storing.Repositories
 
         public bool WriteToFile<T>(string path, T items) where T: class
         {
-            sc.WriteLine("path: " + path);
             try{
                 var writer = new StreamWriter(path);
                 var xml = new XmlSerializer(typeof(T));

@@ -12,20 +12,20 @@ namespace PizzaBox.Domain.Models
         }
         protected override void AddCrust()
         {
-            Crust = new Crust() {Name = "Thick"};
+            Crust = new Crust() {};
         }
 
         protected override void AddSize()
         {
-            Size = new Size() {Name = "Medium"};
+            Size = new Size() {};
         }
 
         protected override void AddToppings()
         {            
             Toppings = new List<Topping> 
             {
-                new Topping() {Name = "Cheese"},
-                new Topping() {Name = "Marinara"},
+                // new Topping() {Name = "Cheese"},
+                // new Topping() {Name = "Marinara"},
             };
         }
 
