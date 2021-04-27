@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Models;
 using PizzaBox.Storing;
+using System.Linq;
 using PizzaBox.Storing.Repositories;
 using sc = System.Console;
 using System.Text;
@@ -17,34 +18,35 @@ namespace PizzaBox.Client.Singletons
 
         public List<Customer> Customers;
 
-        private static CustomerSingleton _instance;
- 
-        public static CustomerSingleton Instance
-        {
-            get{
 
-                if (_instance == null)
+        private static CustomerSingleton _instance;
+        private readonly PizzaBoxContext _context;
+ 
+        public static CustomerSingleton Instance (PizzaBoxContext context)
+        {
+            if (_instance == null)
                 {
-                    _instance = new CustomerSingleton();
+                    _instance = new CustomerSingleton(context);
                 }
                 return _instance;
-            }
+
         }
 
-        private CustomerSingleton()
+        private CustomerSingleton(PizzaBoxContext context)
         {
-            if (Customers == null)
-            {
-                Customers = _fileRepository.ReadFromFile<List<Customer>>(_path);
-            }
+            _context = context;
+            Customers = _context.Customers.ToList();
         }    
 
         // public bool AddCustomer(Customer customer, List<Customer> customers)
         public bool AddCustomer(Customer customer)
         {
             Customers.Add(customer);
-          
-            _fileRepository.WriteToFile<List<Customer>>(_path, Customers);
+
+                _context.Customers.Add(customer);
+                _context.SaveChanges();
+              
+                // _fileRepository.WriteToFile<List<Customer>>(_path, Customers);
 
             return true;
 

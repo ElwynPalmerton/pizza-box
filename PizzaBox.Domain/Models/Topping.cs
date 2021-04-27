@@ -7,6 +7,8 @@ namespace PizzaBox.Domain.Models
 {
     public class Topping : AComponent
     {
+        public List<APizza> PizzaId;
+
 
     }
 }

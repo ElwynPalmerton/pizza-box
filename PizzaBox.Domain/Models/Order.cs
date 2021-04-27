@@ -6,51 +6,37 @@ using System.Collections.Generic;
 namespace PizzaBox.Domain.Models
 {
 
-    public class Order
+    public class Order : AModel 
     {
         public Customer Customer {get; set;}
+
+        // public long CustomerEntityId;
         public AStore Store {get; set;}
-        public APizza Pizza {get; set;}
+        // public APizza Pizza {get; set;}
+        // public long StoreEntityId;
+
+        // public List<APizza> Pizza {get; set;}
 
         public List<APizza> Pizzas {get; set;}
-
         
 
         public override string ToString()
         {
             var stringBuilder = new StringBuilder();
             var separator = ", ";   
-            //Customer
-            //Store
-            //Pizzas    
+ 
             stringBuilder.Append(Customer.ToString() + "\n");
             stringBuilder.Append(Store.ToString() + "\n");
 
-            //Iterate over the pizzas.
-        
-            stringBuilder.Append(Pizza.ToString() + "\n");
 
+            foreach (APizza p in Pizzas) 
+            {
+                stringBuilder.Append(p.ToString() + "\n");
+            }      
 
             return stringBuilder.ToString().TrimEnd(separator.ToCharArray());
 
             //Include price calculation.
-    
         }  
-  
-
-        // public decimal TotalCost
-        // {
-        //     get
-        //     {
-        //         // return Pizza.Crust.Price + Pizza.size.Price + Pizza.Topping.Sum(t => t.Price);
-        //     }
-        // }
-
     }
 }
-
-
-//Each order must be able to modify its collection of pizzas.
-//Each order must be able to compute its pricing.
-//Each order must be limited to a total pricing of no more than $250.
-//Each order must be limited to a collection of no more than 50 pizzas.

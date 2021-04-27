@@ -19,36 +19,24 @@ namespace PizzaBox.Client.Singletons
         // public List<string> ToppingStringList = new List<string>();
 
         private static ToppingSingleton _instance;
+        private readonly PizzaBoxContext _context;
  
-        public static ToppingSingleton Instance
+        public static ToppingSingleton Instance(PizzaBoxContext context)
         {
-            get{
-
                 if (_instance == null)
                 {
-                    _instance = new ToppingSingleton();
+                    _instance = new ToppingSingleton(context);
                 }
                 return _instance;
-            }
         }
 
-        private ToppingSingleton()
+        private ToppingSingleton(PizzaBoxContext context)
         {
             if (Toppings == null)
             {
+                // _context = context;
+                // Toppings = _context.Topping.ToList();
 
-//                 Toppings = new List<Topping>{
-//                     new Topping(){Name="Pepperoni", Price=4.00M},
-//                     new Topping(){Name="Peppers", Price=2.00M},
-//                     new Topping(){Name="Spinach", Price=2.00M},
-//                     new Topping(){Name="Anchovies", Price=2.00M},
-//                     new Topping(){Name="Pinapple", Price=2.00M},
-//                     new Topping(){Name="Ham", Price=4.00M},
-//                     new Topping(){Name="Mushrooms", Price=2.00M},
-//                     new Topping(){Name="Sausage", Price=2.00M},
-//                 };
-// 
-//                 _fileRepository.WriteToFile<List<Topping>>(_path, Toppings);
                 Toppings = _fileRepository.ReadFromFile<List<Topping>>(_path);
             }
         }    

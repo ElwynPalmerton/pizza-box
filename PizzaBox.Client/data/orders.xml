@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Order>
+    <EntityId>0</EntityId>
     <Customer>
+      <EntityId>0</EntityId>
       <Name>Jim</Name>
       <Address>1 Jim Street</Address>
       <PhoneNumber>111-222-3333</PhoneNumber>
@@ -10,19 +12,21 @@
       <EntityId>0</EntityId>
       <Name>Chicago Store</Name>
     </Store>
-    <Pizza xsi:type="CustomPizza">
-      <EntityId>0</EntityId>
-      <Name>Custom Pizza</Name>
-      <Crust>
+    <Pizza>
+      <APizza xsi:type="CustomPizza">
         <EntityId>0</EntityId>
+        <Name>Custom Pizza</Name>
+        <Crust>
+          <EntityId>0</EntityId>
+          <Price>0</Price>
+        </Crust>
+        <Size>
+          <EntityId>0</EntityId>
+          <Price>0</Price>
+        </Size>
+        <Toppings />
         <Price>0</Price>
-      </Crust>
-      <Size>
-        <EntityId>0</EntityId>
-        <Price>0</Price>
-      </Size>
-      <Toppings />
-      <Price>0</Price>
+      </APizza>
     </Pizza>
   </Order>
 </ArrayOfOrder>

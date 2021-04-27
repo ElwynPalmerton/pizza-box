@@ -72,5 +72,17 @@ namespace PizzaBox.Domain.Abstracts{
       return totalPrice;
     }
 
+    public List<string> ToppingStrings()
+    {
+      List<string> toppingStrings = new List<string>();
+
+      foreach (Topping t in Toppings)
+      {
+        toppingStrings.Add(t.Name);
+      }
+      return toppingStrings;
+
+
+    }
   }
 }

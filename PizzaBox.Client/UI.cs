@@ -100,5 +100,44 @@ namespace PizzaBox.Client.Helpers
             sc.WriteLine("");
             sc.ReadKey();
         }
+
+        public static int Selector(string optionString, List<string> options)
+        {
+            int numberOfOptions = options.Count;
+            bool validEntry = false;
+            int optionNumber = -1;
+            string selection;
+
+            while (!validEntry)
+            {
+                UserInterface.MenuTitle(optionString);
+                PrintOptionsList(options);
+                selection = UserInterface.GetUserInfo("Please make a selection: ");
+
+                validEntry = UserInterface.CheckValidNumber(selection, numberOfOptions); 
+                sc.WriteLine();
+
+                if (!validEntry)
+                {
+                    UserInterface.InvalidEntry(selection);
+                } else {
+                    optionNumber = int.Parse(selection);
+                    optionNumber--;
+                    validEntry = true;   
+                }
+            }    
+            return optionNumber;   
+        }
+
+        private static void PrintOptionsList(List<string> options)
+        {
+            int index = 1;
+            foreach(string option in options)
+            {
+                sc.WriteLine(index + ". " + option);
+                index++;
+            }
+            sc.WriteLine();
+        }
     }
 }

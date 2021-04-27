@@ -5,51 +5,51 @@ using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Models;
 using PizzaBox.Client.Singletons;
 using PizzaBox.Client.Helpers;
+using PizzaBox.Storing;    
+using PizzaBox.Storing.Repositories;
 
 namespace PizzaBox.Client 
 {
     public class Program 
     {   
+        private static readonly PizzaBoxContext _context = new PizzaBoxContext();
+        // private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance(_context);
+        // Change the arguments in all of the constructors to take (PizzaBoxContext _context).
 
-        private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance;
-        private static readonly PizzaSingleton _pizzaSingleton = PizzaSingleton.Instance;
-        private static readonly CustomerSingleton _customerSingleton = CustomerSingleton.Instance;
-        private static readonly ToppingSingleton _toppingSingleton = ToppingSingleton.Instance;
+        private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance(_context);
+        private static readonly PizzaSingleton _pizzaSingleton = PizzaSingleton.Instance(_context);
+        private static readonly CustomerSingleton _customerSingleton = CustomerSingleton.Instance(_context);
+        private static readonly ToppingSingleton _toppingSingleton = ToppingSingleton.Instance(_context);
         private static readonly SizeSingleton _sizeSingleton = SizeSingleton.Instance;
         private static readonly CrustSingleton _crustSingleton = CrustSingleton.Instance;
-        private static readonly OrderSingleton _orderSingleton = OrderSingleton.Instance;
+        private static readonly OrderSingleton _orderSingleton = OrderSingleton.Instance(_context);
+        private static readonly OrderRepository _orderRepository = new OrderRepository(_context);
      
         private static void Main() 
         {
-            // Run();
-            Dev();
-        }
-
-        private static void Dev()
-        {
-            var order = new Order();
-
-            // order.Store = SelectStore();
-
-            order.Pizzas = TakeOrder();  
+            Run();
         }
 
         private static void Run()
         {
               sc.WriteLine("run");
-              SelectPortal();
+              SelectPortal();            
         }
 
         private static void RunCustomerPortal() 
         {
-            UserInterface.WelcomeToPizzaBox(); 
-
             var order = new Order();
 
             order.Store = SelectStore();
-            order.Customer = GetCustomer();    
+            // order.Customer = GetCustomer();
+            // order.Pizza = TakeOrder();
 
-            order.Pizzas = TakeOrder();       
+            _orderRepository.Create(order);
+
+
+            // order.Pizzas = TakeOrder();  
+
+            // var orders = _context.Orders.Where(o => o.Customer.Name == order.Customer.Name);
         }
 
         private static void RunOwnerPortal()
@@ -63,7 +63,7 @@ namespace PizzaBox.Client
 
             List<string> PortalOptions = new List<string> {"Customer Portal.", "Owner Portal."};
 
-            int portalSelection = Selector("Select an option: ", 2, PortalOptions);
+            int portalSelection = UserInterface.Selector("Select an option: ", PortalOptions);
 
             if (portalSelection == 0)
             {
@@ -75,32 +75,6 @@ namespace PizzaBox.Client
             }
         }
 
-        private static int Selector(string optionString, int numberOfOptions, List<string> options)
-        {
-            bool validEntry = false;
-            int optionNumber = -1;
-            string selection;
-
-            while (!validEntry)
-            {
-                UserInterface.MenuTitle(optionString);
-                PrintOptionsList(options);
-                selection = UserInterface.GetUserInfo("Please make a selection: ");
-
-                validEntry = UserInterface.CheckValidNumber(selection, numberOfOptions); 
-                sc.WriteLine();
-
-                if (!validEntry)
-                {
-                    UserInterface.InvalidEntry(selection);
-                } else {
-                    optionNumber = int.Parse(selection);
-                    optionNumber--;
-                    validEntry = true;   
-                }
-            }    
-            return optionNumber;   
-        }
         private static AStore SelectStore()
         {
             AStore newStore;
@@ -108,28 +82,13 @@ namespace PizzaBox.Client
             int count = _storeSingleton.Stores.Count;
             List<string> storeList = _storeSingleton.ToStringList();
 
-            int storeNumber = Selector("Enter the number of the nearest store: ", count, storeList);
+            int storeNumber = UserInterface.Selector("Enter the number of the nearest store: ", storeList);
 
             newStore = _storeSingleton.Stores[storeNumber];
             sc.WriteLine(newStore.Name);
             return newStore;
         }
-
-        private static void PrintOptionsList(List<string> options)
-        {
-            // UserInterface.MenuTitle("Please make a selection: ");
-            // sc.WriteLine("Please select a valid option: ");
-            int index = 1;
-            foreach(string option in options)
-            {
-                sc.WriteLine(index + ". " + option);
-                index++;
-            }
-            sc.WriteLine();
-
-        }
-
-
+        
         private static Customer GetCustomer()
         {   
             var newCustomer = new Customer();
@@ -152,9 +111,9 @@ namespace PizzaBox.Client
                 pizzaOrder.Add(newPizza);
 
                 sc.WriteLine("options:");
-                List<string> options = new List<string>{"Add a pizza", "Modify your order", "Complete order"};
+                List<string> options = new List<string>{"Add another pizza", "Modify your order", "Complete order"};
 
-                int option = Selector("Select an option: ", options.Count, options);
+                int option = UserInterface.Selector("Select an option: ", options);
 
                 sc.WriteLine(option + " in TakeOrder");
                 switch(option)
@@ -181,67 +140,25 @@ namespace PizzaBox.Client
             }      
         }
 
-        private static List<APizza> ModifyOrder(List<APizza> pizzas)
-        {
-            if (pizzas.Count > 0) ShowCurrentOrder(pizzas);
-            //List all the pizza in the order to modify.
-            //Pass the pizza into 
-            sc.WriteLine("Inside modify order: ");
-            List<string> options = new List<string>{"Add/remove toppings.", "Remove a pizza from your order", "Nevermind, don't make any changes."};
-            
-            int optionNumber = Selector("Would you like to...", options.Count, options);
-
-            switch (optionNumber)
-            {
-                case 0:
-                    ChangeAPizza(pizzas);
-                    break;
-                case 1:
-                    RemoveAPizza(pizzas);
-                    break;
-                case 2:
-                    break;
-            }
-
-            return pizzas;
-        }    
-
-        
-        private static void ShowAllPizzas (List<APizza> pizzas){
-                int index = 1;
-
-                APizza.Headings();
-                foreach(APizza p in pizzas) {
-                    sc.WriteLine(index + ". " + p.ToString());
-                }
-
-        }
+        private static APizza BuildYourPizza()
+        { 
       
-
-        private static int SelectPizzaToEditOrRemove(List<APizza> pizzas, string message)
-        {  
-            List<string> pizzaList = new List<string>();
-            foreach (APizza p in pizzas)
-            {
-                pizzaList.Add(p.Name);
-            }
-
-            int pizzaNumber = Selector(message, pizzas.Count, pizzaList);
-            return pizzaNumber;
-
+            var newPizza = SelectPizza();
+            var modifiedPizza = ModifyPizza(newPizza);
+            return modifiedPizza;
         }
-        private static List<APizza> ChangeAPizza(List<APizza> pizzas)
+
+        private static APizza SelectPizza()    //Need to change void to APizza
         {
-            int pizzaIndex = SelectPizzaToEditOrRemove(pizzas, "Select a pizza to edit: ");
-            pizzas[pizzaIndex] = ModifyPizza(pizzas[pizzaIndex]);
-            return pizzas;
-        }
+            APizza newPizza;
 
-        private static List<APizza> RemoveAPizza(List<APizza> pizzas)
-        {        
-            int pizzaIndex = SelectPizzaToEditOrRemove(pizzas, "Select a pizza to remove: ");
-            pizzas.RemoveAt(pizzaIndex);
-            return pizzas;
+            int count = _pizzaSingleton.Pizzas.Count;
+            List<string> pizzaList = _pizzaSingleton.ToStringList();
+
+            int pizzaNumber = UserInterface.Selector("Please select a pizza: ", pizzaList);            
+            
+            newPizza = _pizzaSingleton.Pizzas[pizzaNumber];
+            return newPizza;    
         }
 
         private static APizza ModifyPizza(APizza newPizza)
@@ -254,7 +171,7 @@ namespace PizzaBox.Client
                 sc.WriteLine(newPizza.ToString());
                 sc.WriteLine();
 
-                int optionNumber = Selector("Would you like to...", options.Count, options);
+                int optionNumber = UserInterface.Selector("Would you like to...", options);
                 
                 sc.WriteLine(optionNumber + " in BuildYourPizza");
 
@@ -275,29 +192,81 @@ namespace PizzaBox.Client
             } while (!completePizza);
 
             return newPizza;
-
-        }
-        private static APizza BuildYourPizza()
-        { 
-      
-            var newPizza = SelectPizza();
-            var modifiedPizza = ModifyPizza(newPizza);
-            return modifiedPizza;
-
         }
 
-        private static void PrintToppingList()
+        private static List<APizza> ModifyOrder(List<APizza> pizzas)
         {
-            int index = 0;                        
-            UserInterface.MenuTitle("Available Toppings: ");
+            if (pizzas.Count > 0) ShowCurrentOrder(pizzas);
+            //List all the pizza in the order to modify.
+            //Pass the pizza into 
+            sc.WriteLine("Inside modify order: ");
+            List<string> options = new List<string>{"Add/remove toppings.", "Remove a pizza from your order", "Nevermind, don't make any changes."};
+            
+            int optionNumber = UserInterface.Selector("Would you like to...", options);
 
-            foreach (Topping topping in _toppingSingleton.Toppings)
+            switch (optionNumber)
             {
-                index++;
-                sc.WriteLine($"{index} {topping.Name}");
+                case 0:
+                    ChangeAPizza(pizzas);
+                    break;
+                case 1:
+                    RemoveAPizza(pizzas);
+                    break;
+                case 2:
+                    break;
             }
-            sc.WriteLine();
+
+            return pizzas;
+        }    
+
+        private static void ShowAllPizzas (List<APizza> pizzas){
+            int index = 1;
+            APizza.Headings();
+            foreach(APizza p in pizzas) {
+                sc.WriteLine(index + ". " + p.ToString());
+            }
+
         }
+    
+        private static int SelectPizzaToEditOrRemove(List<APizza> pizzas, string message)
+        {  
+            List<string> pizzaList = new List<string>();
+            foreach (APizza p in pizzas)
+            {
+                pizzaList.Add(p.Name);
+            }
+
+            int pizzaNumber = UserInterface.Selector(message, pizzaList);
+            return pizzaNumber;
+
+        }
+     
+        private static List<APizza> ChangeAPizza(List<APizza> pizzas)
+        {
+            int pizzaIndex = SelectPizzaToEditOrRemove(pizzas, "Select a pizza to edit: ");
+            pizzas[pizzaIndex] = ModifyPizza(pizzas[pizzaIndex]);
+            return pizzas;
+        }
+
+        private static List<APizza> RemoveAPizza(List<APizza> pizzas)
+        {        
+            int pizzaIndex = SelectPizzaToEditOrRemove(pizzas, "Select a pizza to remove: ");
+            pizzas.RemoveAt(pizzaIndex);
+            return pizzas;
+        }
+
+//         private static void PrintToppingList()
+//         {
+//             int index = 0;                        
+//             UserInterface.MenuTitle("Available Toppings: ");
+// 
+//             foreach (Topping topping in _toppingSingleton.Toppings)
+//             {
+//                 index++;
+//                 sc.WriteLine($"{index} {topping.Name}");
+//             }
+//             sc.WriteLine();
+//         }
 
         private static APizza AddATopping(APizza currentPizza)
         {
@@ -305,14 +274,13 @@ namespace PizzaBox.Client
 
             bool validEntry = false;
             int toppingNumber = -1;
-            // string toppingSelected;
             Topping newTopping = new Topping();
   
             while (!validEntry)
             {
                 int count = _toppingSingleton.Toppings.Count;
                 List<string> toppingList = _toppingSingleton.ToStringList();
-                toppingNumber = Selector("Select a topping to add: ", count, toppingList);
+                toppingNumber = UserInterface.Selector("Select a topping to add: ", toppingList);
 
                 newTopping = _toppingSingleton.Toppings[toppingNumber]; 
 
@@ -331,104 +299,21 @@ namespace PizzaBox.Client
                     }
                 }
             }       
-
             currentPizza.Toppings.Add(newTopping);
             
             return currentPizza;             
         }
+   
         private static APizza RemoveATopping(APizza currentPizza)
         {
-
-            //Cannot have fewer than two toppings!!!3
-
-            bool validEntry = false;
-            int toppingNumber = -1;
-            string toppingSelected;
-            Topping newTopping = new Topping();
-
-            while (!validEntry)
-            {
-                UserInterface.MenuTitle("Which topping would you like to remove?");
-                sc.WriteLine();
-                int index = 1 ;
-
-                foreach(Topping top in currentPizza.Toppings)
-                {
-                    sc.WriteLine(index + ". " + top.Name);
-                    index++;
-                }
-                sc.WriteLine();
-
-                toppingSelected = UserInterface.GetUserInfo("Enter a number: ");
-                validEntry = UserInterface.CheckValidNumber(toppingSelected, _toppingSingleton.Toppings.Count);
-
-                if (!validEntry)
-                {             
-                    UserInterface.InvalidEntry(toppingSelected);
-                } else {
-                    toppingNumber = int.Parse(toppingSelected);
-                    validEntry = true;   
-                    toppingNumber--;
-                }
-            }
-
+            int toppingNumber = UserInterface.Selector("Which topping would you like to remove", currentPizza.ToppingStrings());
+   
             currentPizza.Toppings.RemoveAt(toppingNumber);
 
             sc.WriteLine("After topping removal: " + currentPizza.ToString());
 
-
             return currentPizza;
         }
-        private static APizza SelectPizza()    //Need to change void to APizza
-        {
-            APizza newPizza;
 
-            int count = _pizzaSingleton.Pizzas.Count;
-            List<string> pizzaList = _pizzaSingleton.ToStringList();
-
-            int pizzaNumber = Selector("Please select a pizza: ", count, pizzaList);
-
-// 
-//             bool validEntry = false;
-//             int pizzaNumber = -1;
-//             string pizzaSelection;
-//   
-//             while (!validEntry)
-//             {
-//                
-//                 PrintPizzaList();
-//                 pizzaSelection = UserInterface.GetUserInfo("Enter a number: ");
-// 
-//                 validEntry = UserInterface.CheckValidNumber(pizzaSelection, _pizzaSingleton.Pizzas.Count);
-// 
-//                 if (!validEntry)
-//                 {             
-//                     UserInterface.InvalidEntry(pizzaSelection);
-//                 } else {
-//                     pizzaNumber = int.Parse(pizzaSelection);
-//                     validEntry = true;   
-//                     pizzaNumber--;
-//                 }
-//             }   
-
-
-
-
-                newPizza = _pizzaSingleton.Pizzas[pizzaNumber];
-                return newPizza;    
-        }
-        private static void PrintPizzaList(string message = "What kind of pizza would you like? ")
-        {
-            int index = 0;                        
-            UserInterface.MenuTitle(message);
-
-            foreach (var pizza in _pizzaSingleton.Pizzas)
-            {
-                index++;
-                sc.WriteLine($"{index} {pizza.Name}");
-            }
-            sc.WriteLine();
-        }
- 
     }   
 }

@@ -5,7 +5,7 @@ using PizzaBox.ConsoleDisplay;
 namespace PizzaBox.Domain.Models
 
 {
-    public class Customer
+    public class Customer : AModel 
     {
 
         public string Name {get; set;}
