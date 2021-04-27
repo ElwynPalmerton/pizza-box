@@ -23,7 +23,6 @@ namespace PizzaBox.Client.Singletons
         private PizzaSingleton(PizzaBoxContext context)
         {
 
-            
 //             _context = context;
 //             Pizzas = _context.Pizzas.ToList();
 
@@ -55,23 +54,3 @@ namespace PizzaBox.Client.Singletons
         }
     }
 }
-
-
-//        private PizzaSingleton(PizzaBoxContext context)
-//         {
-// //             _context = context;
-// //             Pizzas = _context.Pizzas.ToList();
-// 
-//             //Using the XML so it just gives the 3 base types.
-// 
-//             if (Pizzas == null)
-//             {
-//                 // Pizzas = new List<APizza>{
-//                 //     new CustomPizza(),
-//                 //     new MeatPizza(),
-//                 //     new VeggiePizza(),
-//                 // };
-//                 // _fileRepository.WriteToFile<List<APizza>>(_path, Pizzas);
-//                Pizzas = _fileRepository.ReadFromFile<List<APizza>>(_path);
-//             }          
-//         }

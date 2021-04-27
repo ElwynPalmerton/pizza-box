@@ -12,10 +12,8 @@ namespace PizzaBox.Domain.Models
 
         // public long CustomerEntityId;
         public AStore Store {get; set;}
-        // public APizza Pizza {get; set;}
-        // public long StoreEntityId;
-
-        // public List<APizza> Pizza {get; set;}
+        
+        // public long StoreEntityId;   ???
 
         public List<APizza> Pizzas {get; set;}
         

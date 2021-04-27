@@ -48,13 +48,15 @@ namespace PizzaBox.Domain.Abstracts{
         stringBuilder.Append($"{item}{separator}");
       }
 
-      return $"{Crust} \t- {Size} \t\t- {stringBuilder.ToString().TrimEnd(separator.ToCharArray())}";
+      decimal price = this.ComputePrice();
+
+      return $"{Crust}\t\t- {Size} \t\t- {stringBuilder.ToString().TrimEnd(separator.ToCharArray())} - ${price}";
    
     }  
 
     public static string Headings()
     {
-      return $"Crust\t\t - Size\t -  Toppings";
+      return $"Crust\t\t- Size\t\t\t- Toppings";
     }
 
     public decimal ComputePrice()
@@ -81,8 +83,6 @@ namespace PizzaBox.Domain.Abstracts{
         toppingStrings.Add(t.Name);
       }
       return toppingStrings;
-
-
     }
   }
 }

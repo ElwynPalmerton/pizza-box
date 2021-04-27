@@ -61,7 +61,6 @@ namespace PizzaBox.Client.Singletons
             foreach (Topping t in Toppings)
             {
                 ToppingStringList.Add(t.Name);
-                System.Console.WriteLine(t.Name);
             }
         
             return ToppingStringList;

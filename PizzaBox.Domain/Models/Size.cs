@@ -7,7 +7,7 @@ namespace PizzaBox.Domain.Models
 {
     public class Size : AComponent
     {
-        public List<APizza> PizzaId;
+        public List<APizza> Pizzas {get; set;}
 
 
     }

@@ -108,6 +108,7 @@ namespace PizzaBox.Client.Helpers
             int optionNumber = -1;
             string selection;
 
+
             while (!validEntry)
             {
                 UserInterface.MenuTitle(optionString);

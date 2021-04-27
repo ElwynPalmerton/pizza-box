@@ -8,7 +8,7 @@ using PizzaBox.Client.Helpers;
 using PizzaBox.Storing;    
 using PizzaBox.Storing.Repositories;
 
-namespace PizzaBox.Client 
+namespace PizzaBox.Client
 {
     public class Program 
     {   
@@ -28,6 +28,7 @@ namespace PizzaBox.Client
         private static void Main() 
         {
             Run();
+            // RunCustomerPortal();
         }
 
         private static void Run()
@@ -40,16 +41,22 @@ namespace PizzaBox.Client
         {
             var order = new Order();
 
-            order.Store = SelectStore();
-            // order.Customer = GetCustomer();
-            // order.Pizza = TakeOrder();
+            UserInterface.WelcomeToPizzaBox();
+
+            // order.Store = SelectStore();
+
+            order.Store = new ChicagoStore();
+        
+            order.Customer = GetCustomer();
+
+            order.Pizzas = TakeOrder();
+
+            sc.WriteLine(order.Store.ToString());
 
             _orderRepository.Create(order);
 
-
-            // order.Pizzas = TakeOrder();  
-
             // var orders = _context.Orders.Where(o => o.Customer.Name == order.Customer.Name);
+            // PrintListToScreen(orders);
         }
 
         private static void RunOwnerPortal()
@@ -101,8 +108,6 @@ namespace PizzaBox.Client
             bool orderComplete = false;
             List<APizza> pizzaOrder = new List<APizza>();
 
-            //I need to show the order here.
-            
             while (!orderComplete)
             {
                 if (pizzaOrder.Count > 0) ShowCurrentOrder(pizzaOrder);
@@ -115,7 +120,6 @@ namespace PizzaBox.Client
 
                 int option = UserInterface.Selector("Select an option: ", options);
 
-                sc.WriteLine(option + " in TakeOrder");
                 switch(option)
                 {
                     case 0:
@@ -128,6 +132,16 @@ namespace PizzaBox.Client
                         break;
                 }
             }
+
+            sc.ForegroundColor = ConsoleColor.Green;
+            sc.WriteLine("Final Order: ");
+            sc.WriteLine(APizza.Headings());
+            foreach(APizza p in pizzaOrder)
+            {
+                sc.WriteLine(p.ToString());
+            }
+            sc.ResetColor();
+
             return pizzaOrder;
         }
 
@@ -173,7 +187,7 @@ namespace PizzaBox.Client
 
                 int optionNumber = UserInterface.Selector("Would you like to...", options);
                 
-                sc.WriteLine(optionNumber + " in BuildYourPizza");
+
 
                 switch (optionNumber)
                 {
@@ -270,8 +284,6 @@ namespace PizzaBox.Client
 
         private static APizza AddATopping(APizza currentPizza)
         {
-            sc.WriteLine("AddATopping");
-
             bool validEntry = false;
             int toppingNumber = -1;
             Topping newTopping = new Topping();
