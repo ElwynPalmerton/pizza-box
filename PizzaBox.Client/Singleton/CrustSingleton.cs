@@ -4,6 +4,7 @@ using PizzaBox.Domain.Models;
 using PizzaBox.Storing;
 using PizzaBox.Storing.Repositories;
 using System.Text;
+using System.Linq;
 
 
 namespace PizzaBox.Client.Singletons
@@ -15,34 +16,23 @@ namespace PizzaBox.Client.Singletons
         private const string _path = @"data/crusts.xml";
 
         public List<Crust> Crusts;
+        private readonly PizzaBoxContext _context;
 
         private static CrustSingleton _instance;
  
-        public static CrustSingleton Instance
+        public static CrustSingleton Instance(PizzaBoxContext context)
         {
-            get{
-                if (_instance == null)
-                {
-                    _instance = new CrustSingleton();
-                }
-                return _instance;
+            if (_instance == null)
+            {
+                _instance = new CrustSingleton(context);
             }
+            return _instance;
         }
 
-        private CrustSingleton()
+        private CrustSingleton(PizzaBoxContext context)
         {
-            if (Crusts == null)
-            {
-                Crusts = new List<Crust>{
-                    new Crust(){Name="Thin", Price=0.00M},
-                    new Crust(){Name="Sicilian", Price=4.00M},
-                    new Crust(){Name="Stuffed Crust", Price=5.50M},
-                };
-
-                _fileRepository.WriteToFile<List<Crust>>(_path, Crusts);
-
-                // Crusts = _fileRepository.ReadFromFile<List<Crust>>(_path);
-            }
+            _context = context;
+            Crusts = _context.Crust.ToList();
         }    
 
         public string ViewAll()

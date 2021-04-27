@@ -5,33 +5,28 @@ using PizzaBox.Storing;
 using System.Linq;
 using PizzaBox.Storing.Repositories;
 
-
 namespace PizzaBox.Client.Singletons
 {
-
     public class PizzaSingleton
     {
         private readonly FileRepository _fileRepository = new FileRepository();
         private static PizzaSingleton _instance;
         private const string _path = @"data/pizzas.xml";
 
-        private readonly PizzaBoxContext _context = new PizzaBoxContext();
+        private readonly PizzaBoxContext _context;
         public List<APizza> Pizzas;
 
         public List<string> PizzaStrings = new List<string>();
 
         private PizzaSingleton(PizzaBoxContext context)
         {
-
-//             _context = context;
-//             Pizzas = _context.Pizzas.ToList();
-
-            //Using the XML so it just gives the 3 base types.
-
+            // _context = context;
+            // Pizzas = _context.Pizzas.ToList();
             if (Pizzas == null)
-            {
-               Pizzas = _fileRepository.ReadFromFile<List<APizza>>(_path);
-            }          
+            {            
+                Pizzas = _fileRepository.ReadFromFile<List<APizza>>(_path);
+            }
+            // return Pizzas;
         }
 
         public static PizzaSingleton Instance(PizzaBoxContext context)
@@ -46,6 +41,7 @@ namespace PizzaBox.Client.Singletons
 
         public List<string> ToStringList()
         {
+            PizzaStrings.Clear();
             foreach(APizza p in Pizzas)
             {
                 PizzaStrings.Add(p.Name);

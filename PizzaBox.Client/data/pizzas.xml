@@ -11,18 +11,18 @@
     <Size>
       <EntityId>0</EntityId>
       <Name>Medium</Name>
-      <Price>0</Price>
+      <Price>17.50</Price>
     </Size>
     <Toppings>
       <Topping>
         <EntityId>0</EntityId>
         <Name>Cheese</Name>
-        <Price>0</Price>
+        <Price>2.00</Price>
       </Topping>
       <Topping>
         <EntityId>0</EntityId>
         <Name>Marinara</Name>
-        <Price>0</Price>
+        <Price>0.00</Price>
       </Topping>
     </Toppings>
   </APizza>
@@ -37,18 +37,18 @@
     <Size>
       <EntityId>0</EntityId>
       <Name>Medium</Name>
-      <Price>0</Price>
+      <Price>17.00</Price>
     </Size>
     <Toppings>
       <Topping>
         <EntityId>0</EntityId>
         <Name>Pepperoni</Name>
-        <Price>0</Price>
+        <Price>4.60</Price>
       </Topping>
       <Topping>
         <EntityId>0</EntityId>
         <Name>Sausage</Name>
-        <Price>0</Price>
+        <Price>5.60</Price>
       </Topping>
     </Toppings>
   </APizza>
@@ -58,23 +58,23 @@
     <Crust>
       <EntityId>0</EntityId>
       <Name>Gluten Free</Name>
-      <Price>0</Price>
+      <Price>7.00</Price>
     </Crust>
     <Size>
       <EntityId>0</EntityId>
       <Name>Medium</Name>
-      <Price>0</Price>
+      <Price>17.00</Price>
     </Size>
     <Toppings>
       <Topping>
         <EntityId>0</EntityId>
         <Name>Peppers</Name>
-        <Price>0</Price>
+        <Price>3.00</Price>
       </Topping>
       <Topping>
         <EntityId>0</EntityId>
         <Name>Mushrooms</Name>
-        <Price>0</Price>
+        <Price>3.00</Price>
       </Topping>
     </Toppings>
   </APizza>

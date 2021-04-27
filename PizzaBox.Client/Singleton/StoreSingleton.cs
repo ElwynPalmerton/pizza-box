@@ -14,7 +14,7 @@ namespace PizzaBox.Client.Singletons
         private const string _path = @"data/stores.xml";
         private readonly FileRepository _fileRepository = new FileRepository();
         
-        private readonly PizzaBoxContext _context = new PizzaBoxContext();
+        private readonly PizzaBoxContext _context;
         public List<AStore> Stores {get;}
 
         public List<string> StoreStrings = new List<string>();
@@ -22,19 +22,17 @@ namespace PizzaBox.Client.Singletons
         public static StoreSingleton Instance(PizzaBoxContext context)
         {
             if (_instance == null)
-                {
-                    _instance = new StoreSingleton(context);
-                }
-                return _instance;
+            {
+                _instance = new StoreSingleton(context);
+            }
+            return _instance;
         }
 
         private StoreSingleton(PizzaBoxContext context)
         {
             if (Stores == null)
             {
-                // Stores = _fileRepository.ReadFromFile<List<AStore>>(_path);
-                // _context.Stores.AddRange(Stores);
-                
+                _context = context;
                 Stores = _context.Stores.ToList();
             }
         }

@@ -4,11 +4,11 @@ using PizzaBox.Domain.Models;
 using PizzaBox.Storing;
 using PizzaBox.Storing.Repositories;
 using System.Text;
+using System.Linq;
 
 
 namespace PizzaBox.Client.Singletons
 {
-
     public class ToppingSingleton
     {
         private readonly FileRepository _fileRepository = new FileRepository();
@@ -32,14 +32,9 @@ namespace PizzaBox.Client.Singletons
 
         private ToppingSingleton(PizzaBoxContext context)
         {
-            if (Toppings == null)
-            {
-                // _context = context;
-                // Toppings = _context.Topping.ToList();
-
-                Toppings = _fileRepository.ReadFromFile<List<Topping>>(_path);
-            }
-        }    
+                _context = context;
+                Toppings = _context.Toppings.ToList();
+        }
 
         public string ViewAll()
         {
@@ -62,7 +57,6 @@ namespace PizzaBox.Client.Singletons
             {
                 ToppingStringList.Add(t.Name);
             }
-        
             return ToppingStringList;
         }
     }

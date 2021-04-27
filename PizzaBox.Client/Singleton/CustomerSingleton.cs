@@ -29,7 +29,6 @@ namespace PizzaBox.Client.Singletons
                     _instance = new CustomerSingleton(context);
                 }
                 return _instance;
-
         }
 
         private CustomerSingleton(PizzaBoxContext context)

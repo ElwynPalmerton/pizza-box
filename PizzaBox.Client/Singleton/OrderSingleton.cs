@@ -31,16 +31,13 @@ namespace PizzaBox.Client.Singletons
         }
 
         private OrderSingleton(PizzaBoxContext context)
-        {
-            
+        {          
             _context = context;
             Orders = _context.Orders.ToList();
-            
-            Orders = _fileRepository.ReadFromFile<List<Order>>(_path);
 
+            // Orders = _fileRepository.ReadFromFile<List<Order>>(_path);
         }    
 
-        // public bool AddCustomer(Customer customer, List<Customer> customers)
         public bool AddOrder(Order order, PizzaBoxContext _context)    //???????
         {
             // _context = context;
@@ -51,7 +48,6 @@ namespace PizzaBox.Client.Singletons
                 // _fileRepository.WriteToFile<List<Customer>>(_path, Customers);
 
             return true;
-
         }
 
         public string ViewAll()

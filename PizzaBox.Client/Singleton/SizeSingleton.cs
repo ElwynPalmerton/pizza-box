@@ -4,6 +4,7 @@ using PizzaBox.Domain.Models;
 using PizzaBox.Storing;
 using PizzaBox.Storing.Repositories;
 using System.Text;
+using System.Linq;
 
 
 namespace PizzaBox.Client.Singletons
@@ -17,46 +18,22 @@ namespace PizzaBox.Client.Singletons
         public List<Size> Sizes;
 
         private static SizeSingleton _instance;
- 
-        public static SizeSingleton Instance
-        {
-            get{
 
+        private static PizzaBoxContext _context;
+ 
+        public static SizeSingleton Instance(PizzaBoxContext context)
+        {
                 if (_instance == null)
                 {
-                    _instance = new SizeSingleton();
+                    _instance = new SizeSingleton(context);
                 }
                 return _instance;
-            }
         }
 
-        private SizeSingleton()
+        private SizeSingleton(PizzaBoxContext context)
         {
-            if (Sizes == null)
-            {
-//                 Sizes = new List<Size>{
-//                     new Size(){Name="Small", Price=15.00M},
-//                     new Size(){Name="Medium", Price=20.00M},
-//                     new Size(){Name="Large", Price=25.00M},
-//                 };
-// 
-//                 _fileRepository.WriteToFile<List<Size>>(_path, Sizes);
-
-                Sizes = _fileRepository.ReadFromFile<List<Size>>(_path);
-            }
+            _context = context;
+            Sizes = _context.Size.ToList();
         }    
-
-//         public string ViewAll()
-//         {
-//             var stringBuilder = new StringBuilder();
-//             var separator = "\n";
-// 
-//             foreach (var item in Sizes)
-//             {
-//                 stringBuilder.Append($"{item.MenuString()} {separator}");
-//             }
-// 
-//             return stringBuilder.ToString();
-//         }
     }
 }
