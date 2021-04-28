@@ -7,7 +7,7 @@ namespace PizzaBox.Domain.Models
 {
     public class Crust : AComponent
     {
-        public List<APizza> Pizzas;
+        public List<APizza> Pizzas {get; set;}
 
     }
 }

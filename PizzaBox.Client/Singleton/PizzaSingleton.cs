@@ -13,7 +13,7 @@ namespace PizzaBox.Client.Singletons
         private static PizzaSingleton _instance;
         private const string _path = @"data/pizzas.xml";
 
-        private readonly PizzaBoxContext _context;
+        // private readonly PizzaBoxContext _context;
         public List<APizza> Pizzas;
 
         public List<string> PizzaStrings = new List<string>();

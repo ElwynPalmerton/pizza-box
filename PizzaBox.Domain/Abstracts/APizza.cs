@@ -15,9 +15,10 @@ namespace PizzaBox.Domain.Abstracts{
   {
     public string Name;
     public Crust Crust {get; set;}
+    public long CrustId {get; set;}
     public Size Size {get; set;}
+    public long SizeId {get; set;}
     public List<Topping> Toppings {get; set;}
-
     public decimal Price {get; set;}
 
     protected APizza()
@@ -82,7 +83,12 @@ namespace PizzaBox.Domain.Abstracts{
       {
         toppingStrings.Add(t.Name);
       }
+      // sc.WriteLine("ToppingStrings - length: " + toppingStrings.Count);
+
+
       return toppingStrings;
+
+      
     }
   }
 }

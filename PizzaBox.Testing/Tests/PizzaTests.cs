@@ -32,7 +32,7 @@ namespace PizzaBox.Testing.Tests
         }
 
         [Fact]
-        public void Test_ToppingsString ()
+        public void Test_ToppingsStrings ()
         {
             var sut = new CustomPizza();
 
@@ -42,13 +42,33 @@ namespace PizzaBox.Testing.Tests
         }
 
         [Fact]
-        public void Test_ToString()
+        public void Test_MeatPizza_ToString()
         {
-            var sut = new MeatPizza();
+            var sut = new MeatPizza(){Name="Meat Pizza"};
 
             string actual = sut.ToString();
 
             Assert.IsType<string>(actual);
+        }
+
+        [Fact]
+        public void Test_Veggie_ToString()
+        {
+            var sut = new VeggiePizza();
+
+            string actual = sut.ToString();
+
+            Assert.IsType<string>(actual);
+        }
+
+        [Fact]
+        public void Test_CustomPizza()
+        {
+            var sut = new CustomPizza();
+
+            string actual = sut.ToString();
+
+            Assert.NotNull(actual);
         }
     }
 }

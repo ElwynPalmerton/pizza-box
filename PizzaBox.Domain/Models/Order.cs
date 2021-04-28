@@ -36,5 +36,7 @@ namespace PizzaBox.Domain.Models
 
             //Include price calculation.
         }  
+
+
     }
 }

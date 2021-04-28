@@ -8,18 +8,55 @@ namespace PizzaBox.Testing.Tests
     public class StoreTests
     {
         [Fact]
-        public void Test_ChicagoStore()
+        public void Test_ChicagoStore_Name()
         {
             // arrange
             var sut = new ChicagoStore();
 
             // act
             var actual = sut.Name;
-            //sut.Name = "dotnet";  //Cannot be changed because it is protected.
-            //actual = "dotnet"; //This should not happen
             
             // assert
             Assert.IsType<string>(actual);
+        }
+
+        [Fact]
+        public void Test_NewYorktore_Name()
+        {
+            // arrange
+            var sut = new NewYorkStore();
+
+            // act
+            var actual = sut.Name;
+            
+            // assert
+            Assert.IsType<string>(actual);
+        }
+
+        [Fact]
+        public void Test_NewYorkStore_NotNull()
+        {
+            // arrange
+            var sut = new NewYorkStore();
+
+            // act
+            var actual = sut;
+            
+            // assert
+            Assert.NotNull(actual);
+        }
+
+        [Fact]
+        public void Test_ChicagoStore_NotNull()
+        {
+            // arrange
+            var sut = new NewYorkStore();
+
+            // act
+            var actual = sut;
+            
+            // assert
+            Assert.NotNull(actual);
         }
     }
 }

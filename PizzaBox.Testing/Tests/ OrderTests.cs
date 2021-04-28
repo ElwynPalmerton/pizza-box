@@ -12,10 +12,7 @@ namespace PizzaBox.Testing.Tests
         {
 
 
-
-
-
-            Assert.True(true);
+            
         }
     }
 }

@@ -5,7 +5,7 @@ using PizzaBox.Storing;
 using PizzaBox.Storing.Repositories;
 using System.Text;
 using System.Linq;
-
+using sc = System.Console;
 
 namespace PizzaBox.Client.Singletons
 {
@@ -19,7 +19,9 @@ namespace PizzaBox.Client.Singletons
         // public List<string> ToppingStringList = new List<string>();
 
         private static ToppingSingleton _instance;
-        private readonly PizzaBoxContext _context;
+        // private readonly PizzaBoxContext _context;
+
+        public List<string> toppingStringList = new List<string>();
  
         public static ToppingSingleton Instance(PizzaBoxContext context)
         {
@@ -32,8 +34,10 @@ namespace PizzaBox.Client.Singletons
 
         private ToppingSingleton(PizzaBoxContext context)
         {
-                _context = context;
-                Toppings = _context.Toppings.ToList();
+            if (Toppings == null)
+            {            
+                Toppings = _fileRepository.ReadFromFile<List<Topping>>(_path);
+            }
         }
 
         public string ViewAll()
@@ -51,13 +55,16 @@ namespace PizzaBox.Client.Singletons
 
         public List<string> ToStringList()
         {
-            List<string> ToppingStringList = new List<string>();
+            toppingStringList.Clear();
+
+            
+            sc.WriteLine("toppingSTringList: " + toppingStringList.Count);
             
             foreach (Topping t in Toppings)
             {
-                ToppingStringList.Add(t.Name);
+                toppingStringList.Add(t.Name);
             }
-            return ToppingStringList;
+            return toppingStringList;
         }
     }
 }

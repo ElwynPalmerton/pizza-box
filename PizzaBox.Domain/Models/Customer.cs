@@ -1,6 +1,7 @@
 using PizzaBox.Domain.Abstracts;    //What do the dots mean?
 using sc = System.Console;
 using PizzaBox.ConsoleDisplay;
+using System.Text.RegularExpressions;
 
 namespace PizzaBox.Domain.Models
 
@@ -24,13 +25,25 @@ namespace PizzaBox.Domain.Models
         {
 
         }
+
         public void GetCustomerInfo()
         {
             sc.Clear();
             UIDisplay.MenuTitle("Customer information: ");
             this.Name = UIDisplay.GetUserInfo("Please enter your name: ");
             this.Address = UIDisplay.GetUserInfo("Please enter your address: ");
+            
+            Match match;
+            Regex regex = new Regex(@"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$");
+            
+            do
+            {
             this.PhoneNumber = UIDisplay.GetUserInfo("Please enter your phone#: ");
+            match = regex.Match(this.PhoneNumber);
+            
+            if (!match.Success) UIDisplay.InvalidEntry(this.PhoneNumber);
+            
+            } while (!match.Success);
         }
 
         public override string ToString()

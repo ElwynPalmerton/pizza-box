@@ -7,6 +7,8 @@ using PizzaBox.Client.Singletons;
 using PizzaBox.Client.Helpers;
 using PizzaBox.Storing;    
 using PizzaBox.Storing.Repositories;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace PizzaBox.Client
 {
@@ -33,7 +35,7 @@ namespace PizzaBox.Client
 
         private static void Run()
         {
-              sc.WriteLine("run");
+              sc.Clear();
               SelectPortal();            
         }
 
@@ -55,13 +57,37 @@ namespace PizzaBox.Client
 
             _orderRepository.Create(order);
 
-            // var orders = _context.Orders.Where(o => o.Customer.Name == order.Customer.Name);
-            // PrintListToScreen(orders);
+            ShowPreviousOrders(order);
         }
 
         private static void RunOwnerPortal()
         {
             UserInterface.MenuTitle("Welcome to the PizzaBox manager portal!");
+        }
+
+        private static void ShowPreviousOrders(Order order)
+        {
+            var orders = _context.Orders
+                .Where(o => o.Customer.Name == order.Customer.Name)
+                .Include(o => o.Customer)
+                .Include(o => o.Store)
+                .Include(o => o.Pizzas).ThenInclude(p => p.Toppings)
+                .Include(o => o.Pizzas).ThenInclude(p => p.Size)
+                .Include(o => o.Pizzas).ThenInclude(p => p.Crust);
+
+            PrintListToScreen(orders);
+        }
+
+        private static void PrintListToScreen(IEnumerable<object> items)
+        {
+            // var index = 0;
+            sc.WriteLine();
+            sc.WriteLine("Previous Orders: ");
+            foreach (var item in items)
+            {
+                sc.WriteLine();
+                sc.WriteLine(item.ToString());
+            }
         }
 
         private static void SelectPortal()
@@ -186,9 +212,7 @@ namespace PizzaBox.Client
                 sc.WriteLine();
 
                 int optionNumber = UserInterface.Selector("Would you like to...", options);
-                
-
-
+              
                 switch (optionNumber)
                 {
                     case 0:
@@ -214,7 +238,7 @@ namespace PizzaBox.Client
             //List all the pizza in the order to modify.
             //Pass the pizza into 
             sc.WriteLine("Inside modify order: ");
-            List<string> options = new List<string>{"Add/remove toppings.", "Remove a pizza from your order", "Nevermind, don't make any changes."};
+            List<string> options = new List<string>{"Add/remove toppings.", "Remove a pizza from your order", "Nevermind, don't make any changes.", "Complete Order"};
             
             int optionNumber = UserInterface.Selector("Would you like to...", options);
 
@@ -290,9 +314,8 @@ namespace PizzaBox.Client
   
             while (!validEntry)
             {
-                int count = _toppingSingleton.Toppings.Count;
-                List<string> toppingList = _toppingSingleton.ToStringList();
-                toppingNumber = UserInterface.Selector("Select a topping to add: ", toppingList);
+                // int count = _toppingSingleton.Toppings.Count;
+                toppingNumber = UserInterface.Selector("Select a topping to add: ", _toppingSingleton.ToStringList());
 
                 newTopping = _toppingSingleton.Toppings[toppingNumber]; 
 

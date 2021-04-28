@@ -13,6 +13,15 @@ namespace PizzaBox.ConsoleDisplay
             return ReturnValue;
         }
 
+        public static void InvalidEntry(string entry)
+        {
+            sc.Clear();
+            sc.WriteLine();
+            sc.ForegroundColor = ConsoleColor.Magenta;
+            sc.WriteLine(entry + " is not a valid entry.");
+            Console.ResetColor();
+        }
+
         public static void MenuTitle(string title)
         {
             sc.ForegroundColor = ConsoleColor.Blue;

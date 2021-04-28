@@ -13,15 +13,16 @@ namespace PizzaBox.Storing
         public DbSet<APizza> Pizzas {get; set;}
         public DbSet<Customer> Customers {get; set;}
         public DbSet<Size> Size {get; set;}
-
+        public DbSet<Crust> Crust {get; set;}
         public DbSet<Order> Orders {get; set;}
+        public DbSet<Topping> Toppings {get; set;}
         
         //same as the serialization line: 
         //var xml = new XmlSerializer(typeof(T));
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer(_configuration["mssql"]);
+            builder.UseSqlServer(_configuration["mssqltwo"]);
             //Same as the line with path in FileRepo-...
         }  
 
@@ -152,23 +153,23 @@ namespace PizzaBox.Storing
                 },  
             });
 // 
-//             builder.Entity<APizza>().HasData(new APizza[]{
-//                 new CustomPizza(){
-//                     EntityId=1,
-//                     Name="Custom Pizza",
-//                     Price=4.00M,
-//                 },  
-//                 new MeatPizza(){
-//                     EntityId=2,
-//                     Name="Meat Lover's Extravaganza",
-//                     Price=4.00M,
-//                 },  
-//                 new VeggiePizza(){
-//                     EntityId=1,
-//                     Name="Veggie Delight",
-//                     Price=4.00M,
-//                 },  
-//             });
+            // builder.Entity<APizza>().HasData(new APizza[]{
+            //     new CustomPizza(){
+            //         EntityId=1,
+            //         Name="Custom Pizza",
+            //         Price=4.00M,
+            //     },  
+            //     new MeatPizza(){
+            //         EntityId=2,
+            //         Name="Meat Lover's Extravaganza",
+            //         Price=4.00M,
+            //     },  
+            //     new VeggiePizza(){
+            //         EntityId=3,
+            //         Name="Veggie Delight",
+            //         Price=4.00M,
+            //     },  
+            // });
         }
     }
 }

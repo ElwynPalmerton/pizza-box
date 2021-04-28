@@ -29,6 +29,7 @@ namespace PizzaBox.UserInterface.UIDisplay
             return isANumber && isInRange;
         }
 
+ 
         public static void MenuTitle(string title)
         {
             sc.ForegroundColor = ConsoleColor.Blue;
